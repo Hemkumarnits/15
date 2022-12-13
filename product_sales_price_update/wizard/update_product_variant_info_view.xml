@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="update_product_variant_info_form" model="ir.ui.view">
+        <field name="name">update.product.variants.info.form</field>
+        <field name="model">update.product.variants.info</field>
+        <field name="arch" type="xml">
+            <form string="Update Sales Price" style="width: 35%">
+                <script>
+                    $(document).ready(function(){
+                    $('.modal-dialog').css({'width': '38%'});
+                    $('.modal-content').css({'width': '80%'});
+                    $('.modal-body').css({'height': '65%'});
+                    });
+                </script>
+                <group>
+                    <span>Select the required Price checkboxes, then enter the required  % and click Update to Increase or Decrease the Sales Price by % on the selected Products. </span>
+                </group>
+                <group>
+                    <div>
+                        <label for="is_product_template_update_ok" style="font-weight: bolder;"/>
+                        <field name="is_product_template_update_ok"/>
+                    </div>
+                    <div>
+                        <label for="is_variant_extra_price_ok" style="font-weight: bolder;"/>
+                        <field name="is_variant_extra_price_ok"/>
+                    </div>
+                </group>
+                <group>
+                    <div>
+                        <field name="percent" nolabel="1" style="width: 35%; margin-right: 10px"/>
+                        <label for="percent" string="%" style="font-weight: bolder;"/>
+                    </div>
+                    <div>
+                        <field name="variant_extra_price_percent" nolabel="1" style="width: 35%; margin-right: 10px" attrs="{'invisible': [('is_variant_extra_price_ok', '=', False)]}"/>
+                        <label for="variant_extra_price_percent" string="%" style="font-weight: bolder;" attrs="{'invisible': [('is_variant_extra_price_ok', '=', False)]}"/>
+                    </div>
+                </group>
+
+                <footer>
+                    <button name="update_product_variants_sales_price" string="Update" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+        <record model="ir.actions.act_window" id="update_product_variants_info_wizard_action">
+            <field name="name">Update Sales Price</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">update.product.variants.info</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="binding_model_id" ref="product.model_product_product"/>
+            <field name="binding_view_types">list,form</field>
+        </record>
+
+
+</odoo>
